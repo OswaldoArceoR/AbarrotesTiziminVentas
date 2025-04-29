@@ -1,6 +1,6 @@
 # 📦 Primera Entrega - Proyecto "Abarrotes Tizimín"
 
-**Fecha de Entrega:** [Inserte Fecha]  
+**Fecha de Entrega:** 29/04/2025 
 **Versión:** 1.0  
 
 ---
