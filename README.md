@@ -12,19 +12,19 @@ Esta primera entrega corresponde al **diseño conceptual del sistema**, incluyen
 
 ## 🗂️ Componentes Entregados  
 
-### 1. **📋 Requisitos Funcionales**  
+### 1. **[📋 Requisitos Funcionales](https://github.com/OswaldoArceoR/AbarrotesTiziminVentas/blob/Primera_Entrega/RequisitosFuncionales.md)**  
    - Listado detallado de las funcionalidades prioritarias del sistema.  
    - Incluye: Registro de clientes, gestión de artículos, proceso de venta y generación de tickets.  
 
-### 2. **📊 Diagrama de Casos de Uso**  
+### 2. **📊 [Diagrama de Casos de Uso](https://github.com/OswaldoArceoR/AbarrotesTiziminVentas/blob/Primera_Entrega/DiagramaCasosDeUso.md)**  
    - Representación visual de las interacciones entre el gerente y el sistema.  
    - Casos principales: Registrar cliente, registrar artículo, realizar compra.  
 
-### 3. **⏳ Diagrama de Secuencias (Proceso de Compra)**  
+### 3. **⏳ [Diagrama de Secuencias](https://github.com/OswaldoArceoR/AbarrotesTiziminVentas/blob/Primera_Entrega/DiagramaSecuencia.md) (Proceso de Compra)**  
    - Flujo detallado de la operación más crítica: *Realizar Compra*.  
    - Muestra la comunicación entre componentes (interfaz, lógica de negocio y datos).  
 
-### 4. **🧩 Diagrama de Clases**  
+### 4. **🧩 [Diagrama de Clases](https://github.com/OswaldoArceoR/AbarrotesTiziminVentas/blob/Primera_Entrega/DiagramaClases.md)**  
    - Estructura central del sistema con:    
      - **Patrones de diseño aplicados:** Singleton y Factory Method.  
 
