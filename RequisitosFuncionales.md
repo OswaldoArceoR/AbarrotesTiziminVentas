@@ -1,84 +1,113 @@
-# Requisitos Funcionales 
-## Gestión de Clientes
-### RF-01: Registrar cliente
+# Requisitos Funcionales - Abarrotes Tizimín  
 
-Descripción:
+## Gestión de Clientes  
+### RF-01: Registrar cliente  
+**Descripción:**  
+Registrar clientes con:  
+- ID único  
+- Nombre y Apellido Paterno  
+- Dirección (Calle, Número, Colonia, CP, Ciudad, Estado)  
+- Teléfono  
 
-El sistema debe permitir registrar clientes con sus datos personales:
+**Validación:**  
+- Sistema asigna ID automático no editable.  
+- Mensaje: *"Cliente [Nombre] registrado exitosamente"*.  
 
--Identificador del Cliente (ID único).
+---
 
--Nombre y Apellido Paterno.
+## Gestión de Artículos  
+### RF-02: Registrar artículo  
+**Descripción:**  
+Registrar artículos con:  
+- ID único  
+- Nombre  
+- Precio público  
+- Precio proveedor  
+- Stock inicial  
 
--Dirección (compuesta por: Calle, Número, Colonia, CP, Ciudad, Estado).
+**Validación:**  
+- Stock mínimo = 0.  
 
--Teléfono.
+---
 
-## Gestión de Artículos
-### RF-02: Registrar artículo
+## Proceso de Compra  
+### RF-03: Realizar compra  
+**Descripción:**  
+- Seleccionar cliente registrado.  
+- Agregar artículos al carrito (ID + cantidad).  
+- Calcular total basado en precios públicos.  
 
-Descripción:
+**Flujo:**  
+1. Validar stock antes de confirmar (RF-04).  
+2. Actualizar stock automáticamente (RF-07).  
 
-El sistema debe permitir registrar artículos con los siguientes atributos:
+### RF-04: Verificar existencia  
+**Descripción:**  
+- Bloquear compra si no hay stock suficiente.  
+- Mostrar mensaje: *"Error: Stock insuficiente de [Artículo]"*.  
 
--Identificador del artículo (ID único).
+### RF-07: Actualizar stock automáticamente  
+**Descripción:**  
+- Reducir stock tras compra exitosa.  
+- Revertir cambios si la compra se cancela.  
 
--Nombre del artículo.
+**Validación:**  
+- Mensaje post-venta: *"Stock actualizado: [Artículo] = [Nuevo Stock]"*.  
 
--Precio al público.
+---
 
--Precio del proveedor.
+## Generación de Tickets  
+### RF-05: Generar ticket de compra  
+**Contenido Obligatorio:**  
+- Nombre del cliente y fecha.  
+- Lista de artículos (nombre, cantidad, precio unitario).  
+- Total general.  
+- Logo de la tienda.  
 
--Cantidad total en existencia (stock).
+**Formato:**  
+- PDF imprimible o vista previa en pantalla.  
 
-## Proceso de Compra
-### RF-03: Realizar compra
+---
 
-Descripción:
-El sistema debe permitir:
+## Interfaz Gráfica  
+### RF-06: Menú gráfico interactivo  
+**Opciones Principales (JavaFX/Swing):**  
+1. Registrar cliente  
+2. Registrar artículo  
+3. Realizar compra  
+4. Buscar clientes/artículos (RF-08)  
+5. Historial de compras (RF-09)  
+6. Salir  
 
--Seleccionar un cliente registrado.
+---
 
--Agregar artículos al carrito de compra, especificando la cantidad deseada.
+## Búsquedas y Consultas  
+### RF-08: Buscar clientes y artículos  
+**Criterios de Búsqueda:**  
+- **Clientes:** ID, nombre, apellido.  
+- **Artículos:** ID, nombre, rango de precios (público o proveedor).  
 
--Verificar automáticamente la existencia en stock antes de confirmar la compra (RF-04).
+**Interfaz:**  
+- Resultados en tabla con opción de selección múltiple.  
 
--Calcular el importe total basado en los precios al público.
+---
 
+## Historiales y Reportes  
+### RF-09: Historial de compras por cliente  
+**Contenido:**  
+- Listado cronológico de compras.  
+- Detalles por transacción: fecha, artículos, montos.  
 
-### RF-04: Verificar existencia
+**Restricción:**  
+- Solo visible si el cliente tiene ≥1 compra registrada.  
 
-Descripción:
+---
 
-El sistema debe validar que haya suficiente stock para los artículos seleccionados. Si no hay suficiente, mostrar un mensaje de error y evitar finalizar la compra.
+## Alertas y Notificaciones  
+### RF-10: Notificaciones de stock bajo  
+**Activación:**  
+- Al realizar compras que dejen stock <5 unidades.  
+- Al abrir el menú de registro de artículos.  
 
-## Generación de Tickets
-### RF-05: Generar ticket de compra
-
-Descripción:
-
-El sistema debe emitir un ticket con la siguiente información:
-
--Nombre del cliente.
-
--Fecha de la compra.
-
--Lista de artículos comprados (nombre, cantidad, precio unitario).
-
--Importe total de la compra.
-
-## Interfaz Gráfica
-### RF-06: Menú gráfico interactivo
-
-Descripción:
-
-El sistema debe mostrar un menú principal con las siguientes opciones (usando una librería como JavaFX o Swing):
-
--Registrar un cliente.
-
--Registrar un artículo.
-
--Realizar una compra.
-
--Salir del sistema.
-
+**Mensaje:**  
+- *"¡Atención! [Artículo] tiene bajo stock (Unidades: [X]). ¿Reponer ahora? [Sí/No]"*.  
