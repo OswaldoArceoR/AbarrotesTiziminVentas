@@ -1,4 +1,4 @@
-from modelo.entidad_base import EntidadBase
+from codigo.modelo.entidad_base import EntidadBase
 
 class Articulo(EntidadBase):
     def __init__(self, nombre, precio_publico, precio_proveedor, stock):

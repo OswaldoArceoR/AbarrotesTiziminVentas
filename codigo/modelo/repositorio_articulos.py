@@ -1,4 +1,4 @@
-from modelo.repositorio import Repositorio
+from codigo.modelo.repositorio import Repositorio
 
 class RepositorioArticulos(Repositorio):
     def __init__(self):

@@ -1,4 +1,4 @@
-from modelo.articulo import Articulo
+from codigo.modelo.articulo import Articulo
 
 class DetalleVenta:
     def __init__(self, articulo: Articulo, cantidad: int):

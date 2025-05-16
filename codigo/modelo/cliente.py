@@ -1,4 +1,4 @@
-from modelo.entidad_base import EntidadBase
+from codigo.modelo.entidad_base import EntidadBase
 
 class Cliente(EntidadBase):
     def __init__(self, nombre, apellido, direccion, telefono):

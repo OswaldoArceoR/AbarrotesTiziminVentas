@@ -1,5 +1,5 @@
-from modelo.entidad_base import EntidadBase
-from modelo.detalle_venta import DetalleVenta
+from codigo.modelo.entidad_base import EntidadBase
+
 
 class Venta(EntidadBase):
     def __init__(self, cliente):
