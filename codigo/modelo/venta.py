@@ -1,10 +1,12 @@
 from codigo.modelo.entidad_base import EntidadBase
+from datetime import datetime
 
 
 class Venta(EntidadBase):
     def __init__(self, cliente):
         super().__init__()
         self.cliente = cliente
+        self.fecha = datetime.now()
         self.detalles = []
         self.total = 0.0
 

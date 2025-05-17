@@ -8,5 +8,9 @@ class Cliente(EntidadBase):
         self.direccion = direccion
         self.telefono = telefono
 
+    def __init__(self, direccion):
+        if not isinstance(direccion, direccion):
+            raise TypeError("La dirección debe ser un objeto Direccion")
+
     def __str__(self):
         return f"Cliente({self.nombre} {self.apellido}, Tel: {self.telefono})"
