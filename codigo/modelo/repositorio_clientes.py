@@ -1,8 +1,9 @@
 from codigo.modelo.repositorio import Repositorio
+from codigo.modelo.cliente import Cliente
 
 class RepositorioClientes(Repositorio):
     def __init__(self):
-        super().__init__()
+        super().__init__("clientes.csv", ["id", "nombre", "apellido", "direccion", "telefono"])
 
-    def buscar_por_nombre(self, nombre):
-        return [c for c in self.entidades.values() if c.nombre.lower() == nombre.lower()]
+    def crear_instancia(self, datos):
+        return Cliente(datos["nombre"], datos["apellido"], datos["direccion"], datos["telefono"])

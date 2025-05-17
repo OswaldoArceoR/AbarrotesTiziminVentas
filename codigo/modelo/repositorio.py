@@ -1,21 +1,37 @@
 from abc import ABC, abstractmethod
+from codigo.modelo.file_manager import FileManager
 
-class Repositorio(ABC):  # Hereda de ABC para ser abstracta
-    def __init__(self):
-        self.entidades = {}
+class Repositorio(ABC):
+    def __init__(self, nombreArchivo, campos):
+        self.file_manager = FileManager()
+        self.nombreArchivo = nombreArchivo  # Nombre del archivo CSV
+        self.campos = campos  # Campos del CSV
+        self.entidades = self.leerTodos()  # Cargar datos al iniciar
 
     @abstractmethod
+    def crearInstancia(self, datos):
+        """Cada subclase debe definir cómo convertir diccionarios CSV a instancias"""
+        pass
+
     def agregar(self, entidad):
-        pass
+        self.entidades.append(entidad.__dict__)
+        self.guardarTodos()
 
-    @abstractmethod
     def buscar(self, id):
-        pass
+        for entidad in self.entidades:
+            if entidad["id"] == id:
+                return self.crearInstancia(entidad)
+        return None
 
-    @abstractmethod
     def eliminar(self, id):
-        pass
+        self.entidades = [e for e in self.entidades if e["id"] != id]
+        self.guardarTodos()
 
-    @abstractmethod
-    def listar_todos(self):
-        pass
+    def listarTodos(self):
+        return [self.crearInstancia(e) for e in self.entidades]
+
+    def guardarTodos(self):
+        self.file_manager.guardarCsv(self.nombreArchivo, self.entidades, self.campos)
+
+    def leerTodos(self):
+        return self.file_manager.leerCsv(self.nombreArchivo)
