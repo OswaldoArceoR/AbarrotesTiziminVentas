@@ -1,19 +1,21 @@
-class Repositorio:
+from abc import ABC, abstractmethod
+
+class Repositorio(ABC):  # Hereda de ABC para ser abstracta
     def __init__(self):
         self.entidades = {}
 
+    @abstractmethod
     def agregar(self, entidad):
-        self.entidades[entidad.id] = entidad
+        pass
 
+    @abstractmethod
     def buscar(self, id):
-        return self.entidades.get(id, None)
+        pass
 
+    @abstractmethod
     def eliminar(self, id):
-        if id in self.entidades:
-            del self.entidades[id]
+        pass
 
+    @abstractmethod
     def listar_todos(self):
-        return list(self.entidades.values())
-
-    def __str__(self):
-        return f"Repositorio({len(self.entidades)} elementos)"
+        pass
