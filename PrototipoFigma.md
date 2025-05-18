@@ -14,7 +14,7 @@
 ---
 
 ### 2. **Prototipo Interactivo (Demo)**  
-[![Figma Prototype](https://www.figma.com/proto/ZaXGLYtUoOKzb6gdU0PfbP/base?node-id=2-6&p=f&t=aHADA9qrbsNlrJOa-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A6)  
+[![Figma Prototype](https://img.shields.io/badge/FIGMA-Interactive_Prototype-%23F24E1E)](https://www.figma.com/proto/ZaXGLYtUoOKzb6gdU0PfbP/base?node-id=2-6&p=f&t=aHADA9qrbsNlrJOa-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A6)  
 - **Descripción**:  
   Versión navegable para probar el flujo de usuario (haz clic en los botones para simular acciones).  
 - **Características**:  
