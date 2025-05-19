@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ClientesWindow</class>
+ <widget class="QWidget" name="ClientesWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Gestión de Clientes</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+    <!-- Formulario de datos del cliente -->
+    <item>
+      <widget class="QWidget" name="formWidget">
+        <layout class="QFormLayout" name="formLayout">
+          <item row="0" column="0">
+            <widget class="QLabel" name="lblNombre">
+              <property name="text">
+                <string>Nombre:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEditNombre"/>
+          </item>
+          <item row="1" column="0">
+            <widget class="QLabel" name="lblCorreo">
+              <property name="text">
+                <string>Correo:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="1" column="1">
+            <widget class="QLineEdit" name="lineEditCorreo"/>
+          </item>
+        </layout>
+      </widget>
+    </item>
+    <!-- Botones -->
+    <item>
+      <layout class="QHBoxLayout" name="buttonLayout">
+        <item>
+          <widget class="QPushButton" name="btnAgregar">
+            <property name="text">
+              <string>Agregar</string>
+            </property>
+          </widget>
+        </item>
+        <item>
+          <widget class="QPushButton" name="btnActualizar">
+            <property name="text">
+              <string>Actualizar</string>
+            </property>
+          </widget>
+        </item>
+        <item>
+          <widget class="QPushButton" name="btnEliminar">
+            <property name="text">
+              <string>Eliminar</string>
+            </property>
+          </widget>
+        </item>
+      </layout>
+    </item>
+    <!-- Tabla para mostrar clientes -->
+    <item>
+      <widget class="QTableWidget" name="tableClientes">
+        <property name="columnCount">
+          <number>3</number>
+        </property>
+        <property name="horizontalHeaderLabels">
+          <stringlist>
+            <string>ID</string>
+            <string>Nombre</string>
+            <string>Correo</string>
+          </stringlist>
+        </property>
+        <property name="rowCount">
+          <number>0</number>
+        </property>
+      </widget>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
