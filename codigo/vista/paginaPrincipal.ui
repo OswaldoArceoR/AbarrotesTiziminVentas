@@ -52,22 +52,8 @@
     <string>Ventas</string>
    </property>
   </widget>
-  <widget class="QLabel" name="iconoCarrito">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>50</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="pixmap">
-    <pixmap>:/iconoCarrito.png</pixmap>
-   </property>
-  </widget>
+  <!-- Opcional: Agrega otros elementos o iconos según tu diseño -->
  </widget>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

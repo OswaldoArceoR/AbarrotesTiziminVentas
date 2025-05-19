@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ArticulosWindow</class>
+ <widget class="QWidget" name="ArticulosWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Gestión de Artículos</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+    <!-- Formulario de datos del artículo -->
+    <item>
+      <widget class="QWidget" name="formWidget">
+        <layout class="QFormLayout" name="formLayout">
+          <item row="0" column="0">
+            <widget class="QLabel" name="lblNombre">
+              <property name="text">
+                <string>Nombre:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEditNombre"/>
+          </item>
+          <item row="1" column="0">
+            <widget class="QLabel" name="lblPrecioPublico">
+              <property name="text">
+                <string>Precio Público:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="spinPrecioPublico">
+              <property name="minimum">
+                <number>0</number>
+              </property>
+              <property name="maximum">
+                <number>1000000</number> <!-- Permitir hasta 1 millón -->
+              </property>
+              <property name="decimals">
+                <number>2</number>
+              </property>
+            </widget>
+          </item>
+          <item row="2" column="0">
+            <widget class="QLabel" name="lblPrecioProveedor">
+              <property name="text">
+                <string>Precio Proveedor:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="2" column="1">
+            <widget class="QDoubleSpinBox" name="spinPrecioProveedor">
+              <property name="minimum">
+                <number>0</number>
+              </property>
+              <property name="maximum">
+                <number>1000000</number> <!-- Permitir hasta 1 millón -->
+              </property>
+              <property name="decimals">
+                <number>2</number>
+              </property>
+            </widget>
+          </item>
+          <item row="3" column="0">
+            <widget class="QLabel" name="lblStock">
+              <property name="text">
+                <string>Stock:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="3" column="1">
+            <widget class="QSpinBox" name="spinStock">
+              <property name="minimum">
+                <number>0</number>
+              </property>
+              <property name="maximum">
+                <number>10000</number>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </widget>
+    </item>
+    <!-- Botones con nombres visibles -->
+    <item>
+      <layout class="QHBoxLayout" name="buttonLayout">
+        <item>
+          <widget class="QPushButton" name="btnAgregar">
+            <property name="text">
+              <string>Agregar</string>
+            </property>
+          </widget>
+        </item>
+        <item>
+          <widget class="QPushButton" name="btnActualizar">
+            <property name="text">
+              <string>Actualizar</string>
+            </property>
+          </widget>
+        </item>
+        <item>
+          <widget class="QPushButton" name="btnEliminar">
+            <property name="text">
+              <string>Eliminar</string>
+            </property>
+          </widget>
+        </item>
+      </layout>
+    </item>
+    <!-- Tabla para mostrar los artículos -->
+    <item>
+      <widget class="QTableWidget" name="tableArticulos">
+        <property name="columnCount">
+          <number>5</number>
+        </property>
+        <property name="horizontalHeaderLabels">
+          <stringlist>
+            <string>ID</string>
+            <string>Nombre</string>
+            <string>Precio Público</string>
+            <string>Precio Proveedor</string>
+            <string>Stock</string>
+          </stringlist>
+        </property>
+        <property name="rowCount">
+          <number>0</number>
+        </property>
+      </widget>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
