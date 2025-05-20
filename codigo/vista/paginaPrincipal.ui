@@ -429,9 +429,8 @@
    <string>Gestión de Tienda</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="">
-    <normaloff>codigo/vista/logo sin nombre.png</normaloff>
-   </iconset>
+   <iconset>
+    <normaloff>codigo/vista/logo sin nombre.png</normaloff>codigo/vista/logo sin nombre.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -1891,7 +1890,7 @@ QPushButton:pressed {
      <x>10</x>
      <y>10</y>
      <width>150</width>
-     <height>120</height>
+     <height>133</height>
     </rect>
    </property>
    <property name="pixmap">

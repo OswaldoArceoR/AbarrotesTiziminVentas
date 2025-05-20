@@ -142,6 +142,9 @@ class Ventas(QWidget):
         # --- Actualizar stock de artículos vendidos ---
         self.actualizar_stock_articulos_vendidos()
 
+        # --- Recargar productos para actualizar stock en la tabla ---
+        self.cargar_productos()
+
         # --- Generar ticket usando TicketSimpleFactory ---
         # Clases mínimas para adaptarse a la fábrica (ajusta si tienes modelos reales)
         class ClienteObj:
