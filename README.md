@@ -32,6 +32,9 @@ Este proyecto tiene como objetivo desarrollar un sistema de gestión de ventas p
 * 📊 **Base para escalabilidad:** Adaptable a futuras necesidades como reportes o promociones.  
 * 😊 **Mejor experiencia de usuario:** Interfaz diseñada para facilidad de uso en entornos minoristas.  
 
+📦[![Primera entrega](https://img.shields.io/badge/GitHub-Primera_Entrega-%23181717)](https://github.com/OswaldoArceoR/AbarrotesTiziminVentas/tree/Primera_Entrega)
+📦[![Segunda entrega](https://img.shields.io/badge/GitHub-Segunda_Entrga-%23181717)](https://github.com/OswaldoArceoR/AbarrotesTiziminVentas/tree/Segunda_Entrega)
+
 ![logo banner](https://github.com/user-attachments/assets/7524a824-398d-43eb-947e-d173952b183d)
 
 
