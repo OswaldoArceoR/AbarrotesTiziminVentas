@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>900</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,14 +29,84 @@
             <widget class="QLineEdit" name="lineEditNombre"/>
           </item>
           <item row="1" column="0">
-            <widget class="QLabel" name="lblCorreo">
+            <widget class="QLabel" name="lblApellido">
               <property name="text">
-                <string>Correo:</string>
+                <string>Apellido Paterno:</string>
               </property>
             </widget>
           </item>
           <item row="1" column="1">
-            <widget class="QLineEdit" name="lineEditCorreo"/>
+            <widget class="QLineEdit" name="lineEditApellido"/>
+          </item>
+          <item row="2" column="0">
+            <widget class="QLabel" name="lblCalle">
+              <property name="text">
+                <string>Calle:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="2" column="1">
+            <widget class="QLineEdit" name="lineEditCalle"/>
+          </item>
+          <item row="3" column="0">
+            <widget class="QLabel" name="lblNumero">
+              <property name="text">
+                <string>Número:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="3" column="1">
+            <widget class="QLineEdit" name="lineEditNumero"/>
+          </item>
+          <item row="4" column="0">
+            <widget class="QLabel" name="lblColonia">
+              <property name="text">
+                <string>Colonia:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="4" column="1">
+            <widget class="QLineEdit" name="lineEditColonia"/>
+          </item>
+          <item row="5" column="0">
+            <widget class="QLabel" name="lblCP">
+              <property name="text">
+                <string>CP:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="5" column="1">
+            <widget class="QLineEdit" name="lineEditCP"/>
+          </item>
+          <item row="6" column="0">
+            <widget class="QLabel" name="lblCiudad">
+              <property name="text">
+                <string>Ciudad:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="6" column="1">
+            <widget class="QLineEdit" name="lineEditCiudad"/>
+          </item>
+          <item row="7" column="0">
+            <widget class="QLabel" name="lblEstado">
+              <property name="text">
+                <string>Estado:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="7" column="1">
+            <widget class="QLineEdit" name="lineEditEstado"/>
+          </item>
+          <item row="8" column="0">
+            <widget class="QLabel" name="lblTelefono">
+              <property name="text">
+                <string>Teléfono:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="8" column="1">
+            <widget class="QLineEdit" name="lineEditTelefono"/>
           </item>
         </layout>
       </widget>
@@ -71,13 +141,20 @@
     <item>
       <widget class="QTableWidget" name="tableClientes">
         <property name="columnCount">
-          <number>3</number>
+          <number>10</number>
         </property>
         <property name="horizontalHeaderLabels">
           <stringlist>
             <string>ID</string>
             <string>Nombre</string>
-            <string>Correo</string>
+            <string>Apellido</string>
+            <string>Calle</string>
+            <string>Número</string>
+            <string>Colonia</string>
+            <string>CP</string>
+            <string>Ciudad</string>
+            <string>Estado</string>
+            <string>Teléfono</string>
           </stringlist>
         </property>
         <property name="rowCount">

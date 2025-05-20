@@ -4,130 +4,182 @@ from datetime import datetime
 from PyQt6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem
 from PyQt6.uic import loadUi
 
-# Definición de la ruta para el archivo CSV donde se almacenarán las ventas:
-CSV_FILE = os.path.join(os.path.abspath(os.path.dirname(__file__)), "registroVentas.csv")
+# Rutas relativas al directorio donde está este archivo
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CSV_FILE = os.path.join(BASE_DIR, "registroVentas.csv")
+CSV_CLIENTES = os.path.join(BASE_DIR, "registroClientes.csv")
+CSV_ARTICULOS = os.path.join(BASE_DIR, "registroArticulos.csv")
+
+# Importa la fábrica de tickets
+from codigo.controlador.TicketSimpleFactory import TicketSimpleFactory
 
 class Ventas(QWidget):
     def __init__(self):
         super().__init__()
-        base_dir = os.path.abspath(os.path.dirname(__file__))
-        # IMPORTANTE: El archivo de la interfaz debe llamarse "Ventas.ui" (con V mayúscula)
-        ui_path = os.path.join(base_dir, "Ventas.ui")
+        ui_path = os.path.join(BASE_DIR, "Ventas.ui")
         if not os.path.exists(ui_path):
             raise FileNotFoundError(f"No se encontró el archivo UI: {ui_path}")
         loadUi(ui_path, self)
 
-        self.lista_ventas = []
+        # Listas para la venta actual
+        self.productos_disponibles = []
+        self.productos_venta = []
+        self.total_venta = 0.0
 
-        # Conectar botones a sus funciones:
-        self.btnRegistrarVenta.clicked.connect(self.registrar_venta)
-        self.btnActualizarVenta.clicked.connect(self.actualizar_venta)
-        self.btnEliminarVenta.clicked.connect(self.eliminar_venta)
-        self.tableVentas.itemSelectionChanged.connect(self.mostrar_venta_seleccionada)
+        # Cargar clientes y productos
+        self.cargar_clientes()
+        self.cargar_productos()
 
-        # Cargar los datos si existen y actualizar la tabla
-        self.cargar_datos_csv()
-        self.actualizar_tabla()
+        # Conectar botones
+        self.btnAgregarProducto.clicked.connect(self.agregar_producto_a_venta)
+        self.btnEliminarProducto.clicked.connect(self.eliminar_producto_de_venta)
+        self.btnTerminarVenta.clicked.connect(self.terminar_venta)
 
-    def registrar_venta(self):
-        cliente = self.lineEditCliente.text().strip()
-        total = self.spinTotal.value()
+        # Inicializar tabla de productos en venta
+        self.tablaVenta.setRowCount(0)
+        self.actualizar_total()
+
+    def cargar_clientes(self):
+        self.comboCliente.clear()
+        if not os.path.exists(CSV_CLIENTES):
+            print(f"registroCliente.csv no encontrado en: {CSV_CLIENTES}")
+            return
+        with open(CSV_CLIENTES, mode="r", encoding="utf-8") as f:
+            reader = csv.reader(f)
+            encabezado = next(reader, None)
+            for row in reader:
+                # Solo agrega si la fila tiene datos y el nombre no es vacío ni igual al encabezado
+                if row and row[0].strip() and (not encabezado or row[0].strip() != encabezado[0].strip()):
+                    self.comboCliente.addItem(row[1].strip())
+        if self.comboCliente.count() == 0:
+            print("No se encontraron clientes válidos en registroCliente.csv")
+
+    def cargar_productos(self):
+        self.productos_disponibles.clear()
+        self.tablaProductos.setRowCount(0)
+        if not os.path.exists(CSV_ARTICULOS):
+            print(f"registroArticulos.csv no encontrado en: {CSV_ARTICULOS}")
+            return
+        with open(CSV_ARTICULOS, mode="r", encoding="utf-8") as f:
+            reader = csv.reader(f)
+            next(reader, None)
+            for row in reader:
+                if len(row) >= 3:
+                    producto = {
+                        "codigo": row[0],
+                        "nombre": row[1],
+                        "precio": float(row[2])
+                    }
+                    self.productos_disponibles.append(producto)
+        for idx, prod in enumerate(self.productos_disponibles):
+            self.tablaProductos.insertRow(idx)
+            self.tablaProductos.setItem(idx, 0, QTableWidgetItem(prod["codigo"]))
+            self.tablaProductos.setItem(idx, 1, QTableWidgetItem(prod["nombre"]))
+            self.tablaProductos.setItem(idx, 2, QTableWidgetItem(f"${prod['precio']:.2f}"))
+
+    def agregar_producto_a_venta(self):
+        row = self.tablaProductos.currentRow()
+        if row < 0 or row >= len(self.productos_disponibles):
+            QMessageBox.warning(self, "Error", "Seleccione un producto para agregar.")
+            return
+        producto = self.productos_disponibles[row]
+        self.productos_venta.append(producto)
+        self.actualizar_tabla_venta()
+        self.actualizar_total()
+
+    def eliminar_producto_de_venta(self):
+        row = self.tablaVenta.currentRow()
+        if row < 0 or row >= len(self.productos_venta):
+            QMessageBox.warning(self, "Error", "Seleccione un producto para eliminar.")
+            return
+        del self.productos_venta[row]
+        self.actualizar_tabla_venta()
+        self.actualizar_total()
+
+    def terminar_venta(self):
+        cliente = self.comboCliente.currentText()
         if not cliente:
-            QMessageBox.warning(self, "Error", "El cliente no puede estar vacío.")
+            QMessageBox.warning(self, "Error", "Debe seleccionar un cliente.")
             return
-        if total <= 0:
-            QMessageBox.warning(self, "Error", "El total debe ser mayor a 0.")
+        if not self.productos_venta:
+            QMessageBox.warning(self, "Error", "Debe agregar al menos un producto.")
             return
-        venta = {
-            "id": str(len(self.lista_ventas) + 1),
+        total = self.total_venta
+        productos_str = ";".join([f"{p['codigo']}:{p['nombre']}:{p['precio']}" for p in self.productos_venta])
+        venta_dict = {
+            "id": self.obtener_nueva_id(),
             "cliente": cliente,
             "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "productos": productos_str,
             "total": total
         }
-        self.lista_ventas.append(venta)
-        self.guardar_datos_csv()
-        self.actualizar_tabla()
-        self.limpiar_formulario()
+        self.guardar_venta_csv(venta_dict)
 
-    def actualizar_venta(self):
-        index = self.tableVentas.currentRow()
-        if index < 0 or index >= len(self.lista_ventas):
-            QMessageBox.warning(self, "Error", "Seleccione una venta para actualizar.")
-            return
-        cliente = self.lineEditCliente.text().strip()
-        total = self.spinTotal.value()
-        if not cliente:
-            QMessageBox.warning(self, "Error", "El cliente no puede estar vacío.")
-            return
-        if total <= 0:
-            QMessageBox.warning(self, "Error", "El total debe ser mayor a 0.")
-            return
-        self.lista_ventas[index]["cliente"] = cliente
-        self.lista_ventas[index]["total"] = total
-        self.guardar_datos_csv()
-        self.actualizar_tabla()
-        self.limpiar_formulario()
+        # --- Generar ticket usando TicketSimpleFactory ---
+        # Clases mínimas para adaptarse a la fábrica (ajusta si tienes modelos reales)
+        class ClienteObj:
+            def __init__(self, nombre):
+                self.nombre = nombre
 
-    def eliminar_venta(self):
-        index = self.tableVentas.currentRow()
-        if index < 0 or index >= len(self.lista_ventas):
-            QMessageBox.warning(self, "Error", "Seleccione una venta para eliminar.")
-            return
-        del self.lista_ventas[index]
-        self.guardar_datos_csv()
-        self.actualizar_tabla()
-        self.limpiar_formulario()
+        class ArticuloObj:
+            def __init__(self, nombre):
+                self.nombre = nombre
 
-    def actualizar_tabla(self):
-        self.tableVentas.setRowCount(0)
-        for venta in self.lista_ventas:
-            row = self.tableVentas.rowCount()
-            self.tableVentas.insertRow(row)
-            self.tableVentas.setItem(row, 0, QTableWidgetItem(venta["id"]))
-            self.tableVentas.setItem(row, 1, QTableWidgetItem(venta["cliente"]))
-            self.tableVentas.setItem(row, 2, QTableWidgetItem(venta["fecha"]))
-            self.tableVentas.setItem(row, 3, QTableWidgetItem(f"${venta['total']:.2f}"))
+        class DetalleVenta:
+            def __init__(self, articulo, cantidad, subtotal):
+                self.articulo = articulo
+                self.cantidad = cantidad
+                self.subtotal = subtotal
 
-    def limpiar_formulario(self):
-        self.lineEditCliente.clear()
-        self.spinTotal.setValue(0)
-        self.tableVentas.clearSelection()
+        class VentaObj:
+            def __init__(self, cliente, detalles, total):
+                self.cliente = cliente
+                self.detalles = detalles
+                self.total = total
 
-    def guardar_datos_csv(self):
-        with open(CSV_FILE, mode="w", newline="", encoding="utf-8") as file:
-            writer = csv.writer(file)
-            writer.writerow(["ID", "Cliente", "Fecha", "Total"])
-            for venta in self.lista_ventas:
-                writer.writerow([venta["id"], venta["cliente"], venta["fecha"], venta["total"]])
+        detalles = []
+        for p in self.productos_venta:
+            articulo = ArticuloObj(p["nombre"])
+            detalles.append(DetalleVenta(articulo, 1, p["precio"]))
 
-    def cargar_datos_csv(self):
+        venta_obj = VentaObj(ClienteObj(cliente), detalles, total)
+        ticket_factory = TicketSimpleFactory()
+        ticket = ticket_factory.crear_ticket(venta_obj)
+
+        mensaje = f"La venta se ha registrado correctamente.\n\nTicket:\n{ticket.contenido}"
+        if hasattr(ticket, "pdf_path") and ticket.pdf_path:
+            mensaje += f"\n\nTicket PDF generado en:\n{ticket.pdf_path}"
+        QMessageBox.information(self, "Venta registrada", mensaje)
+
+        self.productos_venta.clear()
+        self.actualizar_tabla_venta()
+        self.actualizar_total()
+
+    def actualizar_tabla_venta(self):
+        self.tablaVenta.setRowCount(0)
+        for idx, prod in enumerate(self.productos_venta):
+            self.tablaVenta.insertRow(idx)
+            self.tablaVenta.setItem(idx, 0, QTableWidgetItem(prod["codigo"]))
+            self.tablaVenta.setItem(idx, 1, QTableWidgetItem(prod["nombre"]))
+            self.tablaVenta.setItem(idx, 2, QTableWidgetItem(f"${prod['precio']:.2f}"))
+
+    def actualizar_total(self):
+        self.total_venta = sum([p["precio"] for p in self.productos_venta])
+        self.lblTotalVenta.setText(f"Total: ${self.total_venta:.2f}")
+
+    def obtener_nueva_id(self):
         if not os.path.exists(CSV_FILE):
-            return
-        with open(CSV_FILE, mode="r", newline="", encoding="utf-8") as file:
-            reader = csv.reader(file)
-            try:
-                next(reader)  # Saltar encabezado
-            except StopIteration:
-                return
-            self.lista_ventas = []
-            for row in reader:
-                try:
-                    venta = {
-                        "id": row[0],
-                        "cliente": row[1],
-                        "fecha": row[2],
-                        "total": float(row[3])
-                    }
-                    self.lista_ventas.append(venta)
-                except (ValueError, IndexError):
-                    continue
-        self.actualizar_tabla()
+            return "1"
+        with open(CSV_FILE, mode="r", encoding="utf-8") as f:
+            reader = csv.reader(f)
+            next(reader, None)
+            ids = [int(row[0]) for row in reader if row and row[0].isdigit()]
+            return str(max(ids) + 1) if ids else "1"
 
-    def mostrar_venta_seleccionada(self):
-        index = self.tableVentas.currentRow()
-        if index < 0 or index >= len(self.lista_ventas):
-            self.limpiar_formulario()
-            return
-        venta = self.lista_ventas[index]
-        self.lineEditCliente.setText(venta["cliente"])
-        self.spinTotal.setValue(venta["total"])
+    def guardar_venta_csv(self, venta):
+        existe = os.path.exists(CSV_FILE)
+        with open(CSV_FILE, mode="a", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            if not existe:
+                writer.writerow(["ID", "Cliente", "Fecha", "Productos", "Total"])
+            writer.writerow([venta["id"], venta["cliente"], venta["fecha"], venta["productos"], venta["total"]])

@@ -2,99 +2,114 @@
 <ui version="4.0">
  <class>VentasWindow</class>
  <widget class="QWidget" name="VentasWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>666</width>
+    <height>679</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>Ventas</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-    <!-- Formulario para datos de venta -->
-    <item>
-      <layout class="QFormLayout" name="formLayout">
-        <item row="0" column="0">
-          <widget class="QLabel" name="lblCliente">
-            <property name="text">
-              <string>Cliente:</string>
-            </property>
-          </widget>
-        </item>
-        <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEditCliente"/>
-        </item>
-        <item row="1" column="0">
-          <widget class="QLabel" name="lblTotal">
-            <property name="text">
-              <string>Total:</string>
-            </property>
-          </widget>
-        </item>
-        <item row="1" column="1">
-          <widget class="QDoubleSpinBox" name="spinTotal">
-            <property name="maximum">
-              <number>1000000</number>
-            </property>
-            <property name="decimals">
-              <number>2</number>
-            </property>
-          </widget>
-        </item>
-      </layout>
-    </item>
-    <!-- Botones para las acciones -->
-    <item>
-      <layout class="QHBoxLayout" name="buttonsLayout">
-        <item>
-          <widget class="QPushButton" name="btnRegistrarVenta">
-            <property name="text">
-              <string>Registrar Venta</string>
-            </property>
-          </widget>
-        </item>
-        <item>
-          <widget class="QPushButton" name="btnActualizarVenta">
-            <property name="text">
-              <string>Actualizar Venta</string>
-            </property>
-          </widget>
-        </item>
-        <item>
-          <widget class="QPushButton" name="btnEliminarVenta">
-            <property name="text">
-              <string>Eliminar Venta</string>
-            </property>
-          </widget>
-        </item>
-      </layout>
-    </item>
-    <!-- Tabla para mostrar las ventas -->
-    <item>
-      <widget class="QTableWidget" name="tableVentas">
-        <property name="columnCount">
-          <number>4</number>
-        </property>
-        <property name="rowCount">
-          <number>0</number>
-        </property>
-        <column>
-          <property name="text">
-            <string>ID</string>
-          </property>
-        </column>
-        <column>
-          <property name="text">
-            <string>Cliente</string>
-          </property>
-        </column>
-        <column>
-          <property name="text">
-            <string>Fecha</string>
-          </property>
-        </column>
-        <column>
-          <property name="text">
-            <string>Total</string>
-          </property>
-        </column>
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblCliente">
+       <property name="text">
+        <string>Cliente:</string>
+       </property>
       </widget>
-    </item>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="comboCliente"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tablaProductos">
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <property name="columnCount">
+      <number>3</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>Código</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nombre</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Precio</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnAgregarProducto">
+     <property name="text">
+      <string>Agregar producto</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tablaVenta">
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <property name="columnCount">
+      <number>3</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>Código</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nombre</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Precio</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="ventaButtonsLayout">
+     <item>
+      <widget class="QPushButton" name="btnEliminarProducto">
+       <property name="text">
+        <string>Eliminar producto</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnTerminarVenta">
+       <property name="text">
+        <string>Terminar venta</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblTotalVenta">
+     <property name="text">
+      <string>Total: $0.00</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>

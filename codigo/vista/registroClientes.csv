@@ -1,2 +1,2 @@
-ID,Nombre,Correo
-1,Pancho Dzip panti,Panchopant@yahoo.com
+ID,Nombre,Apellido,Calle,Numero,Colonia,CP,Ciudad,Estado,Telefono
+1,Pancho,Pantera,24,62,Centro,97750,Tlaxcala,Chiapas,9861121342

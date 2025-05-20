@@ -21,9 +21,9 @@ def main():
     encabezados_ventas    = ["id", "cliente_id", "fecha", "total"]
 
     # Inicializar archivos CSV si no existen
-    inicializar_archivo_si_no_existe("registroArticulos.csv", encabezados_articulos)
-    inicializar_archivo_si_no_existe("registroClientes.csv", encabezados_clientes)
-    inicializar_archivo_si_no_existe("registroVentas.csv", encabezados_ventas)
+    #inicializar_archivo_si_no_existe("registroArticulos.csv", encabezados_articulos)
+    #inicializar_archivo_si_no_existe("registroClientes.csv", encabezados_clientes)
+    #inicializar_archivo_si_no_existe("registroVentas.csv", encabezados_ventas)
 
     app = QApplication(sys.argv)
     ventana = PaginaPrincipal()
