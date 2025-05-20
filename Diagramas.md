@@ -1,4 +1,7 @@
 # Diagramas
+## Aquí se puede descargar el archivo .astah [![Google Drive](https://img.shields.io/badge/GOOGLE%20DRIVE-Ver%20Documento-%230083FF?logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1bdBdgXTPXBcToNRGOFll6x3O4vH8GtrO/view?usp=sharing)
+
+
 ## Diagrama de clases
 ![image](https://github.com/user-attachments/assets/b0afd2b3-c90f-4427-8968-3b3eda2f4d9c)
 
