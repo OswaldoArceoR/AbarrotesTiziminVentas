@@ -3,9 +3,10 @@
 ## 📋 [Requisitos Funcionales](https://github.com/OswaldoArceoR/AbarrotesTiziminVentas/blob/Segunda_Entrega/Requisitos_Funcionales.md)  
 
 ## 📊 [Diagramas UML](https://github.com/OswaldoArceoR/AbarrotesTiziminVentas/blob/Segunda_Entrega/Diagramas.md)  
-## Documento [![Descargar Documento](https://img.shields.io/badge/Descargar-Proyecto_Final.docx-blue?style=for-the-badge&logo=download)](https://github.com/user-attachments/files/20349147/Proyecto.Final.docx)
+## Documento [![Descargar Documento](https://img.shields.io/badge/Descargar-Proyecto_Final.docx-blue?style=for-the-badge&logo=download)](https://github.com/user-attachments/files/20349285/Proyecto_Final_Diseno_software.docx)
 
 ---
+
 
 ## 💻 Código Fuente  
 ### **Repositorio GitHub**  
