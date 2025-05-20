@@ -2,9 +2,10 @@ from codigo.modelo.ticket import Ticket
 from datetime import datetime
 import os
 import csv
+from .TicketFactory import TicketFactory  # Importa la interfaz/protocolo
 
-class TicketSimpleFactory:
-    def crear_ticket(self, venta=None) -> Ticket:
+class TicketSimpleFactory(TicketFactory):  # Hereda explícitamente
+    def crear_ticket(self, venta=None) -> Ticket:  # Firma compatible con la interfaz
         """
         Genera el ticket usando los datos del registro más reciente en el CSV de ventas.
         Utiliza la librería fpdf para crear el PDF.

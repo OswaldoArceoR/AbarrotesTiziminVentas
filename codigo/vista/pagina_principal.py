@@ -1,6 +1,7 @@
 import os
-from PyQt6.QtWidgets import QWidget
+from PyQt6.QtWidgets import QWidget, QApplication  # Añade QApplication
 from PyQt6.uic import loadUi
+from PyQt6.QtGui import QIcon  # <-- Importa QIcon
 
 # Se importan las clases para cada ventana.
 from .articulos import Articulos
@@ -15,6 +16,15 @@ class PaginaPrincipal(QWidget):
         if not os.path.exists(ui_path):
             raise FileNotFoundError(f"No se encontró el UI: {ui_path}")
         loadUi(ui_path, self)
+
+        # Establece el icono de la ventana manualmente
+        icon_path = os.path.join("codigo", "vista", "logo sin nombre.png")
+        if os.path.exists(os.path.join(base_dir, "logo sin nombre.png")):
+            icon_path = os.path.join(base_dir, "logo sin nombre.png")
+        icon = QIcon(icon_path)
+        self.setWindowIcon(icon)
+        # Establece el icono global para la barra de tareas
+        QApplication.setWindowIcon(icon)
 
         # Inicializamos las ventanas en None para instanciarlas cuando se necesiten.
         self.articulos_window = None

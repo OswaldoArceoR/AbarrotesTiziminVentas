@@ -1,6 +1,7 @@
 import os
-from PyQt6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem
+from PyQt6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem, QApplication  # Añade QApplication
 from PyQt6.uic import loadUi
+from PyQt6.QtGui import QIcon
 import csv
 
 CSV_FILE = os.path.join(os.path.abspath(os.path.dirname(__file__)), "registroArticulos.csv")
@@ -16,6 +17,15 @@ class Articulos(QWidget):
             raise FileNotFoundError(f"No se encontró el archivo UI: {ui_path}")
 
         loadUi(ui_path, self)
+
+        # Establece el icono de la ventana manualmente
+        icon_path = os.path.join("codigo", "vista", "logo sin nombre.png")
+        if os.path.exists(os.path.join(base_dir, "logo sin nombre.png")):
+            icon_path = os.path.join(base_dir, "logo sin nombre.png")
+        icon = QIcon(icon_path)
+        self.setWindowIcon(icon)
+        # Establece el icono global para la barra de tareas
+        QApplication.setWindowIcon(icon)
 
         self.lista_articulos = []
 

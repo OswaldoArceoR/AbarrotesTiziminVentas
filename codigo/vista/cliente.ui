@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>Gestión de Clientes</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="">
+    <normaloff>codigo/vista/logo sin nombre.png</normaloff>
+   </iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
     <!-- Formulario de datos del cliente -->
     <item>

@@ -428,6 +428,11 @@
   <property name="windowTitle">
    <string>Gestión de Tienda</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="">
+    <normaloff>codigo/vista/logo sin nombre.png</normaloff>
+   </iconset>
+  </property>
   <property name="autoFillBackground">
    <bool>false</bool>
   </property>
