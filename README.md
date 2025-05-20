@@ -1,6 +1,6 @@
 # 📦 Segunda Entrega - Sistema de Gestión "Abarrotes Tizimín"
 
-## 📋 [Requisitos Funcionales]()  
+## 📋 [Requisitos Funcionales](https://github.com/OswaldoArceoR/AbarrotesTiziminVentas/blob/Segunda_Entrega/Requisitos_Funcionales.md)  
 
 ## 📊 Diagramas UML  
 
