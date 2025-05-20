@@ -1,5 +1,5 @@
 # Diagramas
-## Aquí se puede descargar el archivo .astah [![Google Drive](https://img.shields.io/badge/GOOGLE%20DRIVE-Ver%20Documento-%230083FF?logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1bdBdgXTPXBcToNRGOFll6x3O4vH8GtrO/view?usp=sharing)
+## Aquí se puede descargar el archivo .astah [![Google Drive](https://img.shields.io/badge/GOOGLE%20DRIVE-Ver%20Documento-%230083FF?logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1cU7rY9Wto1Tqjhmadi_AUOzwKv5ObALE/view?usp=sharing)
 
 
 ## Diagrama de clases
@@ -28,11 +28,12 @@
 
 
 ## Diagrama de colaboración
-![image](https://github.com/user-attachments/assets/576199c6-3b59-4987-ad7a-8511a3b741c5)
+![image](https://github.com/user-attachments/assets/51e349ad-5a47-4c83-9ad7-f918f9d1a4e8)
 
 
 ## Diagrama de actividades 
-![image](https://github.com/user-attachments/assets/4f2f8ef7-b82c-469b-b9f4-737e7db8d5e4)
+![image](https://github.com/user-attachments/assets/0b366e0e-107c-4b4e-833e-293fb3b8e230)
+
 
 
 
