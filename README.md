@@ -1,38 +1,33 @@
-# 🛒 Sistema de Gestión de Ventas - Abarrotes Tizimín
+# 📦 Segunda Entrega - Sistema de Gestión "Abarrotes Tizimín"
 
-### 📝 Descripción General  
-Este proyecto tiene como objetivo desarrollar un sistema de gestión de ventas para la tienda **"Abarrotes Tizimín"**, enfocado en optimizar el control de clientes, artículos y transacciones comerciales. La herramienta permitirá automatizar procesos clave como registro de ventas, generación de tickets y gestión de inventario.  
+## 📋 [Requisitos Funcionales]()  
 
+## 📊 Diagramas UML  
 
+### 1.[Casos de Uso](enlace_a_imagen_casos_de_uso.png)  
+*Descripción*: Interacciones del usuario (gerente) con el sistema.  
 
-### 🎯 Objetivos Principales  
-* 🤖 **Automatización de ventas:** Eliminar registros manuales y reducir errores en cobros.  
-* 📋 **Control de inventario:** Monitoreo en tiempo real de existencias de artículos.  
-* 🎫 **Mejora en la atención al cliente:** Emisión rápida de tickets con detalles claros de compra.  
-* 🚀 **Optimización operativa:** Agilizar procesos diarios para enfocar esfuerzos en crecimiento del negocio.  
+### 2. [Diagrama de Clases](enlace_a_imagen_clases.png)  
+*Incluye patrones*:  
+- **Singleton**: Clase `Tienda` (una única instancia).  
+- **Factory Method**: Creación de `Ticket` mediante `TicketFactory`.  
+- **Observer**: Notificaciones de stock bajo (`Articulo` → `VistaPrincipal`).  
 
+### 3. [Secuencia](enlace_a_imagen_secuencia.png)  
+*Flujo*: Proceso de venta desde selección de artículos hasta generación de ticket.  
 
+### 4. [Estado](enlace_a_imagen_estado.png)  
+*Estados de una venta*: Iniciada → En proceso → Completada/Cancelada.  
 
-### 🚀 Funcionalidades Clave  
-* 👤 **Registro de clientes:** Almacenamiento de datos completos (nombre, dirección, teléfono).  
-* 📦 **Gestión de artículos:** Control de precios al público/proveedor y existencias.  
-* 🛍️ **Proceso de ventas integrado:**  
-  - Selección de múltiples artículos  
-  - Validación automática de stock  
-  - Cálculo de totales con impresión de ticket  
-* 🧾 **Ticket profesional:** Incluye fecha, datos del cliente, artículos comprados y totales.  
-* 🖥️ **Interfaz gráfica intuitiva:** Menú principal con navegación simplificada (JavaFX/Swing).  
+### 5. [Colaboración](enlace_a_imagen_colaboracion.png)  
+*Interacción entre objetos*: `VistaVenta`, `VentaController`, `Articulo`, `Ticket`.  
 
+### 6. [Actividad](enlace_a_imagen_actividad.png)  
+  
 
+---
 
-### ✅ Beneficios Esperados  
-* ⏰ **Reducción de tiempos** en procesos de venta y registro manual.  
-* 📈 **Precisión en inventarios** con actualización automática tras cada compra.  
-* 🛡️ **Transparencia comercial** mediante tickets estandarizados y detallados.  
-* 📊 **Base para escalabilidad:** Adaptable a futuras necesidades como reportes o promociones.  
-* 😊 **Mejor experiencia de usuario:** Interfaz diseñada para facilidad de uso en entornos minoristas.  
+## 💻 Código Fuente  
+### **Repositorio GitHub**  
+[![GitHub](https://img.shields.io/badge/GitHub-Código_Fuente-%23181717)](https://github.com/tu-usuario/abarrotes-tizimin)  
 
-![logo banner](https://github.com/user-attachments/assets/7524a824-398d-43eb-947e-d173952b183d)
-
-
-> **🌟 ¡Importante!** Proyecto en desarrollo. Aun nos falta La segunda entrega :D
