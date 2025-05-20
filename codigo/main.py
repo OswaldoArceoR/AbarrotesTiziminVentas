@@ -1,27 +1,30 @@
 import sys
 import os
+import csv
 from PyQt6.QtWidgets import QApplication
 from vista.pagina_principal import PaginaPrincipal
-from modelo.file_manager import FileManager
+from modelo.file_manager import FileManager  # Si lo utilizas; de lo contrario, puedes omitirlo
 
 def inicializar_archivo_si_no_existe(ruta_archivo, encabezados):
     if not os.path.exists(ruta_archivo):
         print(f"Archivo '{ruta_archivo}' no existe. Creando con encabezados.")
-        FileManager.escribir_csv(ruta_archivo, [encabezados])
+        with open(ruta_archivo, mode="w", newline="", encoding="utf-8") as file:
+            writer = csv.writer(file)
+            writer.writerow(encabezados)
     else:
         print(f"Archivo '{ruta_archivo}' ya existe. No se sobrescribe.")
 
 def main():
-
-
-    # Encabezados por archivo
+    # Encabezados para cada CSV
     encabezados_articulos = ["id", "nombre", "precio", "stock"]
-    encabezados_clientes = ["id", "nombre", "telefono"]
-    encabezados_ventas = ["id", "cliente_id", "fecha", "total"]
+    encabezados_clientes  = ["id", "nombre", "telefono"]
+    encabezados_ventas    = ["id", "cliente_id", "fecha", "total"]
 
-    # Verificar y crear archivos si no existen
+    # Inicializar archivos CSV si no existen
+    inicializar_archivo_si_no_existe("registroArticulos.csv", encabezados_articulos)
+    inicializar_archivo_si_no_existe("registroClientes.csv", encabezados_clientes)
+    inicializar_archivo_si_no_existe("registroVentas.csv", encabezados_ventas)
 
-    # Iniciar la aplicación
     app = QApplication(sys.argv)
     ventana = PaginaPrincipal()
     ventana.show()

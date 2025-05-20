@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VentasWindow</class>
+ <widget class="QWidget" name="VentasWindow">
+  <property name="windowTitle">
+   <string>Ventas</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+    <!-- Formulario para datos de venta -->
+    <item>
+      <layout class="QFormLayout" name="formLayout">
+        <item row="0" column="0">
+          <widget class="QLabel" name="lblCliente">
+            <property name="text">
+              <string>Cliente:</string>
+            </property>
+          </widget>
+        </item>
+        <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEditCliente"/>
+        </item>
+        <item row="1" column="0">
+          <widget class="QLabel" name="lblTotal">
+            <property name="text">
+              <string>Total:</string>
+            </property>
+          </widget>
+        </item>
+        <item row="1" column="1">
+          <widget class="QDoubleSpinBox" name="spinTotal">
+            <property name="maximum">
+              <number>1000000</number>
+            </property>
+            <property name="decimals">
+              <number>2</number>
+            </property>
+          </widget>
+        </item>
+      </layout>
+    </item>
+    <!-- Botones para las acciones -->
+    <item>
+      <layout class="QHBoxLayout" name="buttonsLayout">
+        <item>
+          <widget class="QPushButton" name="btnRegistrarVenta">
+            <property name="text">
+              <string>Registrar Venta</string>
+            </property>
+          </widget>
+        </item>
+        <item>
+          <widget class="QPushButton" name="btnActualizarVenta">
+            <property name="text">
+              <string>Actualizar Venta</string>
+            </property>
+          </widget>
+        </item>
+        <item>
+          <widget class="QPushButton" name="btnEliminarVenta">
+            <property name="text">
+              <string>Eliminar Venta</string>
+            </property>
+          </widget>
+        </item>
+      </layout>
+    </item>
+    <!-- Tabla para mostrar las ventas -->
+    <item>
+      <widget class="QTableWidget" name="tableVentas">
+        <property name="columnCount">
+          <number>4</number>
+        </property>
+        <property name="rowCount">
+          <number>0</number>
+        </property>
+        <column>
+          <property name="text">
+            <string>ID</string>
+          </property>
+        </column>
+        <column>
+          <property name="text">
+            <string>Cliente</string>
+          </property>
+        </column>
+        <column>
+          <property name="text">
+            <string>Fecha</string>
+          </property>
+        </column>
+        <column>
+          <property name="text">
+            <string>Total</string>
+          </property>
+        </column>
+      </widget>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
