@@ -1,5 +1,9 @@
 # 🛒 Sistema de Gestión de Ventas - Abarrotes Tizimín
-
+## 👷🏻Integrantes:
+### Oswaldo Arceo
+### Daniel Bacelis
+### Jenrri Puch
+---
 ### 📝 Descripción General  
 Este proyecto tiene como objetivo desarrollar un sistema de gestión de ventas para la tienda **"Abarrotes Tizimín"**, enfocado en optimizar el control de clientes, artículos y transacciones comerciales. La herramienta permitirá automatizar procesos clave como registro de ventas, generación de tickets y gestión de inventario.  
 
@@ -36,6 +40,3 @@ Este proyecto tiene como objetivo desarrollar un sistema de gestión de ventas p
 📦[![Segunda entrega](https://img.shields.io/badge/GitHub-Segunda_Entrga-%23181717)](https://github.com/OswaldoArceoR/AbarrotesTiziminVentas/tree/Segunda_Entrega)
 
 ![logo banner](https://github.com/user-attachments/assets/7524a824-398d-43eb-947e-d173952b183d)
-
-
-> **🌟 ¡Importante!** Proyecto en desarrollo. Aun nos falta La segunda entrega :D
