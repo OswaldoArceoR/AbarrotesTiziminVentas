@@ -25,7 +25,7 @@ Este proyecto tiene como objetivo desarrollar un sistema de gestión de ventas p
   - Validación automática de stock  
   - Cálculo de totales con impresión de ticket  
 * 🧾 **Ticket profesional:** Incluye fecha, datos del cliente, artículos comprados y totales.  
-* 🖥️ **Interfaz gráfica intuitiva:** Menú principal con navegación simplificada (JavaFX/Swing).  
+* 🖥️ **Interfaz gráfica intuitiva:** Menú principal con navegación simplificada (PyQt).  
 
 
 
