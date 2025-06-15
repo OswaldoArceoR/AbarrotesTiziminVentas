@@ -1,9 +1,9 @@
 import os
 import csv
 from datetime import datetime
-from PyQt6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem, QApplication  # Añade QApplication
+from PyQt6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem, QApplication, QHeaderView
 from PyQt6.uic import loadUi
-from PyQt6.QtGui import QIcon  # <-- Importa QIcon
+from PyQt6.QtGui import QIcon
 
 # Rutas relativas al directorio donde está este archivo
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -11,9 +11,8 @@ CSV_FILE = os.path.join(BASE_DIR, "registroVentas.csv")
 CSV_CLIENTES = os.path.join(BASE_DIR, "registroClientes.csv")
 CSV_ARTICULOS = os.path.join(BASE_DIR, "registroArticulos.csv")
 
-# Importa la fábrica de tickets
 from codigo.controlador.TicketSimpleFactory import TicketSimpleFactory
-from codigo.controlador.AlertaStock import AlertaStock  # Importa la alerta de stock
+from codigo.controlador.AlertaStock import AlertaStock
 
 class Ventas(QWidget):
     def __init__(self):
@@ -50,7 +49,11 @@ class Ventas(QWidget):
         self.tablaVenta.setRowCount(0)
         self.actualizar_total()
 
-        self.alerta_stock = AlertaStock(umbral_stock=3)  # Puedes ajustar el umbral
+        self.alerta_stock = AlertaStock(umbral_stock=3)
+
+        # Ajustar columnas de las tablas para que se estiren al tamaño de la ventana
+        self.tablaProductos.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.tablaVenta.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
     def showEvent(self, event):
         # Recarga productos y clientes cada vez que la ventana se muestra
@@ -107,6 +110,20 @@ class Ventas(QWidget):
             QMessageBox.warning(self, "Error", "Seleccione un producto para agregar.")
             return
         producto = self.productos_disponibles[row]
+
+        # Contar cuántas veces ya se ha agregado este producto a la venta
+        cantidad_en_venta = sum(1 for p in self.productos_venta if p["codigo"] == producto["codigo"])
+
+        # Verificar stock disponible
+        if producto["stock"] <= 0:
+            QMessageBox.warning(self, "Stock insuficiente", f"No hay stock disponible para '{producto['nombre']}'.")
+            fprint(f"Intento de agregar '{producto['nombre']}' sin stock disponible.")
+            return
+        if cantidad_en_venta >= producto["stock"]:
+            QMessageBox.warning(self, "Stock insuficiente", f"No puedes agregar más unidades de '{producto['nombre']}' de las disponibles ({producto['stock']}).")
+            fprint(f"Intento de agregar más unidades de '{producto['nombre']}' que el stock disponible.")
+            return
+
         self.productos_venta.append(producto)
         self.actualizar_tabla_venta()
         self.actualizar_total()
@@ -261,3 +278,7 @@ class Ventas(QWidget):
             if not existe:
                 writer.writerow(["ID", "Cliente", "Fecha", "Productos", "Total"])
             writer.writerow([venta["id"], venta["cliente"], venta["fecha"], venta["productos"], venta["total"]])
+
+# Añade esta función al final del archivo si no existe fprint
+def fprint(msg):
+    print(f"[VENTAS] {msg}")

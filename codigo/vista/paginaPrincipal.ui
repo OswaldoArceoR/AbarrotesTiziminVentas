@@ -1889,8 +1889,8 @@ QPushButton:pressed {
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>150</width>
-     <height>133</height>
+     <width>141</width>
+     <height>141</height>
     </rect>
    </property>
    <property name="pixmap">

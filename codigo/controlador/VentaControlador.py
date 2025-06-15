@@ -3,6 +3,8 @@ from codigo.modelo.repositorio_ventas import RepositorioVentas
 from codigo.controlador.TicketFactory import TicketFactory
 from codigo.modelo.venta import Venta
 from codigo.modelo.ticket import Ticket
+from codigo.modelo.excepciones import StockInsuficienteError
+
 
 class VentaControlador:
     def __init__(self):
@@ -15,9 +17,14 @@ class VentaControlador:
         return venta
 
     def agregar_detalle(self, venta, articulo, cantidad):
-        """Agrega un artículo a la venta (RF-03)."""
-        if not articulo.validar_stock(cantidad):
-            raise ValueError(f"Stock insuficiente: {articulo.nombre}")  # RF-04
+        cantidad_existente = sum(
+            d.cantidad for d in venta.detalles if d.articulo == articulo
+        )
+        cantidad_total = cantidad_existente + cantidad
+
+        if not articulo.validar_stock(cantidad_total):
+            raise StockInsuficienteError(f"Stock insuficiente: {articulo.nombre}")
+
         detalle = DetalleVenta(articulo, cantidad)
         venta.agregar_detalle(detalle)
         return venta

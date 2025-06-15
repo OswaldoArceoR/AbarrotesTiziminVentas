@@ -1,8 +1,10 @@
 import os
-from PyQt6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem, QApplication  # Añade QApplication
+from PyQt6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem, QApplication
 from PyQt6.uic import loadUi
 from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import QHeaderView  # <-- Añade esto
 import csv
+from codigo.modelo.excepciones import ClienteDuplicadoError
 
 CSV_FILE = os.path.join(os.path.abspath(os.path.dirname(__file__)), "registroClientes.csv")
 
@@ -37,6 +39,9 @@ class Cliente(QWidget):
         self.cargar_datos_csv()
         self.actualizar_tabla_clientes()
 
+        # Ajustar columnas de la tabla para que se estiren al tamaño de la ventana
+        self.tableClientes.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
     def generar_id_unico(self):
         ids = [int(cliente["id"]) for cliente in self.lista_clientes if cliente["id"].isdigit()]
         return str(max(ids) + 1) if ids else "1"
@@ -62,23 +67,31 @@ class Cliente(QWidget):
             QMessageBox.warning(self, "Error", "El teléfono no puede estar vacío.")
             return
 
-        cliente = {
-            "id": self.generar_id_unico(),
-            "nombre": nombre,
-            "apellido": apellido,
-            "calle": calle,
-            "numero": numero,
-            "colonia": colonia,
-            "cp": cp,
-            "ciudad": ciudad,
-            "estado": estado,
-            "telefono": telefono
-        }
+        try:
+            # Validar duplicados por nombre y apellido
+            for cliente in self.lista_clientes:
+                if cliente["nombre"] == nombre and cliente["apellido"] == apellido:
+                    raise ClienteDuplicadoError(f"El cliente '{nombre} {apellido}' ya existe.")
 
-        self.lista_clientes.append(cliente)
-        self.guardar_datos_csv()
-        self.actualizar_tabla_clientes()
-        self.limpiar_formulario_clientes()
+            cliente = {
+                "id": self.generar_id_unico(),
+                "nombre": nombre,
+                "apellido": apellido,
+                "calle": calle,
+                "numero": numero,
+                "colonia": colonia,
+                "cp": cp,
+                "ciudad": ciudad,
+                "estado": estado,
+                "telefono": telefono
+            }
+
+            self.lista_clientes.append(cliente)
+            self.guardar_datos_csv()
+            self.actualizar_tabla_clientes()
+            self.limpiar_formulario_clientes()
+        except ClienteDuplicadoError as e:
+            QMessageBox.warning(self, "Error De Duplicado", str(e))
 
     def actualizar_cliente(self):
         selected = self.tableClientes.currentRow()

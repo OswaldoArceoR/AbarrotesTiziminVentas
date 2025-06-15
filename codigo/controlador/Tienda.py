@@ -1,3 +1,5 @@
+#Singleton
+
 from codigo.modelo.repositorio_clientes import RepositorioClientes
 from codigo.modelo.repositorio_ventas import RepositorioVentas
 from codigo.modelo.repositorio_articulos import RepositorioArticulos
@@ -27,3 +29,5 @@ class Tienda:
 
     def get_repo_ventas(self):
         return self.repo_ventas
+
+

@@ -3,7 +3,7 @@ import os
 import csv
 from PyQt6.QtWidgets import QApplication
 from vista.pagina_principal import PaginaPrincipal
-from modelo.file_manager import FileManager  # Si lo utilizas; de lo contrario, puedes omitirlo
+
 
 def inicializar_archivo_si_no_existe(ruta_archivo, encabezados):
     if not os.path.exists(ruta_archivo):

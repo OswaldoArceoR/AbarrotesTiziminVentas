@@ -1,3 +1,5 @@
+#Observer
+
 class AlertaStock:
     def __init__(self, umbral_stock: int = 5):
         self.umbral_stock = umbral_stock  # Nivel mínimo de stock para alertar (RF-10)

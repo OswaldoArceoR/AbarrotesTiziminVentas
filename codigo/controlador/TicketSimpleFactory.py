@@ -1,3 +1,5 @@
+#Factory
+
 from codigo.modelo.ticket import Ticket
 from datetime import datetime
 import os

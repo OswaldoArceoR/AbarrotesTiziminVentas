@@ -1,8 +1,9 @@
 import os
-from PyQt6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem, QApplication  # Añade QApplication
+from PyQt6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem, QApplication, QHeaderView
 from PyQt6.uic import loadUi
 from PyQt6.QtGui import QIcon
 import csv
+from codigo.modelo.excepciones import ArticuloDuplicadoError  # Import único, se elimina el duplicado
 
 CSV_FILE = os.path.join(os.path.abspath(os.path.dirname(__file__)), "registroArticulos.csv")
 
@@ -24,7 +25,6 @@ class Articulos(QWidget):
             icon_path = os.path.join(base_dir, "logo sin nombre.png")
         icon = QIcon(icon_path)
         self.setWindowIcon(icon)
-        # Establece el icono global para la barra de tareas
         QApplication.setWindowIcon(icon)
 
         self.lista_articulos = []
@@ -35,9 +35,13 @@ class Articulos(QWidget):
         self.btnEliminar.clicked.connect(self.eliminar_articulo)
         self.tableArticulos.itemSelectionChanged.connect(self.cargar_datos_articulo_seleccionado)
 
+        # Ajustar columnas de la tabla para que se estiren al tamaño de la ventana
+        self.tableArticulos.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+
         # Cargar datos guardados
         self.cargar_datos_csv()
         self.actualizar_tabla_articulos()
+
 
     def agregar_articulo(self):
         nombre = self.lineEditNombre.text().strip()
@@ -53,18 +57,28 @@ class Articulos(QWidget):
             QMessageBox.warning(self, "Error", "El precio debe ser mayor a 0.")
             return
 
-        articulo = {
-            "id": str(len(self.lista_articulos) + 1),
-            "nombre": nombre,
-            "precio_publico": precio_publico,
-            "precio_proveedor": precio_proveedor,
-            "stock": stock
-        }
+        # Validar duplicados
+        try:
+            for articulo in self.lista_articulos:
+                if (articulo["nombre"] == nombre and
+                        articulo["precio_publico"] == precio_publico and
+                        articulo["precio_proveedor"] == precio_proveedor):
+                    raise ArticuloDuplicadoError(f"El artículo '{nombre}' ya existe.")
 
-        self.lista_articulos.append(articulo)
-        self.guardar_datos_csv()
-        self.actualizar_tabla_articulos()
-        self.limpiar_formulario_articulos()
+            articulo = {
+                "id": str(len(self.lista_articulos) + 1),
+                "nombre": nombre,
+                "precio_publico": precio_publico,
+                "precio_proveedor": precio_proveedor,
+                "stock": stock
+            }
+
+            self.lista_articulos.append(articulo)
+            self.guardar_datos_csv()
+            self.actualizar_tabla_articulos()
+            self.limpiar_formulario_articulos()
+        except ArticuloDuplicadoError as e:
+            QMessageBox.warning(self, "Error De Duplicado", str(e))
 
     def actualizar_articulo(self):
         selected = self.tableArticulos.currentRow()
